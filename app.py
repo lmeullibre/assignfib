@@ -1,12 +1,28 @@
 from flask import Flask, Blueprint, render_template
 from pip._vendor import requests
-import json
-
+from anytree import Node, RenderTree
 from api.restplus import api
 import settings
 from api.endpoints.hello import ns as hello_namespace
 
 app = Flask(__name__)
+
+url = 'http://api.fib.upc.edu/v2/'
+pack = '?client_id=4Prn0YdaE8beYA9PpdeBJS46vmBVshrjbpn4LAbH&format=json'
+
+def cerca(id):
+    r = requests.get(url+'/assignatures/requisits'+pack).json()
+    results = r['results']
+
+def getRequisits(id):
+
+
+    assig = Node(id)
+    print(assig)
+
+    for x, i in enumerate(results):
+        print(x)
+    return 3
 
 
 def configure_app(flask_app):
@@ -38,11 +54,8 @@ def hello(id):
     return r.json()
 
 @app.route('/requisits/<string:id>', methods=['GET'])
-def getRequisits(id):
-    uri = "https://api.fib.upc.edu/v2/assignatures/?client_id=4Prn0YdaE8beYA9PpdeBJS46vmBVshrjbpn4LAbH&format=json"
-    r = (requests.get(uri)).json()
-    print(r)
-
+def requisits(id):
+    getRequisits(id)
     return "hola"
 
 
