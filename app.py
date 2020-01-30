@@ -10,19 +10,26 @@ app = Flask(__name__)
 url = 'http://api.fib.upc.edu/v2/'
 pack = '?client_id=4Prn0YdaE8beYA9PpdeBJS46vmBVshrjbpn4LAbH&format=json'
 
-def cerca(id):
-    r = requests.get(url+'/assignatures/requisits'+pack).json()
-    results = r['results']
+def cerca(id, node, jason):
+
+    results = jason['results']
+    trobat = False
+    for x in results:
+        if x['destination'] == id:
+            trobat = True
+            fill = Node(x['origin'], parent = node)
+            cerca(x['origin'], fill, jason )
+    if not trobat:
+        print("no trobat")
+        return "tope"
 
 def getRequisits(id):
-
-
+    r = requests.get(url + '/assignatures/requisits' + pack).json()
     assig = Node(id)
-    print(assig)
+    resultat = cerca(id, assig, r)
+    print(resultat)
 
-    for x, i in enumerate(results):
-        print(x)
-    return 3
+    print(RenderTree(assig))
 
 
 def configure_app(flask_app):
