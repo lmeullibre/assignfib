@@ -1,5 +1,6 @@
 from flask import Flask, Blueprint, render_template
 from pip._vendor import requests
+import json
 
 from api.restplus import api
 import settings
@@ -30,13 +31,19 @@ def initialize_app(flask_app):
 def index():
     return render_template('index.html')
 
-@app.route('/course/', methods= ['GET'])
-def hello():
-    print("holaaa")
-    r = requests.get('https://api.fib.upc.edu/v2/competencies/?client_id=4Prn0YdaE8beYA9PpdeBJS46vmBVshrjbpn4LAbH&format=json')
-    print(r.json())
+@app.route('/course/<string:id>', methods= ['GET'])
+def hello(id):
+    uri = "http://api.fib.upc.edu/v2/assignatures/"+id+"?client_id=4Prn0YdaE8beYA9PpdeBJS46vmBVshrjbpn4LAbH&format=json"
+    r = requests.get(uri)
     return r.json()
 
+@app.route('/requisits/<string:id>', methods=['GET'])
+def getRequisits(id):
+    uri = "https://api.fib.upc.edu/v2/assignatures/?client_id=4Prn0YdaE8beYA9PpdeBJS46vmBVshrjbpn4LAbH&format=json"
+    r = (requests.get(uri)).json()
+    print(r)
+
+    return "hola"
 
 
 
