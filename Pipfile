@@ -10,6 +10,7 @@ flask = "*"
 flask-restplus = "*"
 sqlalchemy = "*"
 anytree = "*"
+patool ="*"
 
 [requires]
 python_version = "3.7"
