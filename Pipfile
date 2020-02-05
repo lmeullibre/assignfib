@@ -13,5 +13,6 @@ anytree = "*"
 patool ="*"
 flask-bootstrap = "*"
 flask-nav = "*"
+spotipy = "*"
 [requires]
 python_version = "3.7"

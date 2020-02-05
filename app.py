@@ -4,25 +4,20 @@ from anytree.exporter import DotExporter
 from flask import Flask, Blueprint, render_template, send_file
 from pip._vendor import requests
 from anytree import Node, RenderTree
-from api.restplus import api
 import settings
-from api.endpoints.hello import ns as hello_namespace
 from flask_bootstrap import Bootstrap
 from flask_nav import Nav
 from flask_nav.elements import Navbar, View
 import patoolib
 import zipfile
 from io import BytesIO
-import pathlib
+import sys
 import os
+import spotipy
+from spotipy import util
 
 app = Flask(__name__)
 Bootstrap(app)
-
-url = 'http://api.fib.upc.edu/v2/'
-pack = '?client_id=4Prn0YdaE8beYA9PpdeBJS46vmBVshrjbpn4LAbH&format=json'
-
-
 nav = Nav()
 
 @nav.navigation()
@@ -65,6 +60,8 @@ def configure_app(flask_app):
 
 def initialize_app(flask_app):
     configure_app(flask_app)
+    util.prompt_for_user_token(username, scope, client_id='your-spotify-client-id',
+                               client_secret='your-spotify-client-secret', redirect_uri='your-app-redirect-url')
 
     nav.init_app(app)
 
