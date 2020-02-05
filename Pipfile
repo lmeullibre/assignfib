@@ -11,6 +11,7 @@ flask-restplus = "*"
 sqlalchemy = "*"
 anytree = "*"
 patool ="*"
-
+flask-bootstrap = "*"
+flask-nav = "*"
 [requires]
 python_version = "3.7"

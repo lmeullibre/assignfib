@@ -98,38 +98,7 @@ def descargar():
 
 @app.route('/covers')
 def covers():
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return 3
 
 
 def main():
